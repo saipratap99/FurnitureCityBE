@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "nTQkGXHd0tg=",
-  "success": false,
+  "dgSpecHash": "MhsIbv06IWk=",
+  "success": true,
   "projectFilePath": "/Users/saipratap/PE/FurnitureStore/FurnitureCityBE/FurnitureCityBE.csproj",
   "expectedPackageFiles": [
     "/Users/saipratap/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
@@ -58,9 +58,10 @@
   ],
   "logs": [
     {
-      "code": "NU1107",
-      "level": "Error",
-      "message": "Version conflict detected for Microsoft.EntityFrameworkCore.Relational. Install/reference Microsoft.EntityFrameworkCore.Relational 9.0.0 directly to project FurnitureCityBE to resolve this issue. \n FurnitureCityBE -> Microsoft.EntityFrameworkCore.Tools 9.0.0 -> Microsoft.EntityFrameworkCore.Design 9.0.0 -> Microsoft.EntityFrameworkCore.Relational (>= 9.0.0) \n FurnitureCityBE -> Pomelo.EntityFrameworkCore.MySql 8.0.2 -> Microsoft.EntityFrameworkCore.Relational (>= 8.0.2 && <= 8.0.999).",
+      "code": "NU1608",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package version outside of dependency constraint: Pomelo.EntityFrameworkCore.MySql 8.0.2 requires Microsoft.EntityFrameworkCore.Relational (>= 8.0.2 && <= 8.0.999) but version Microsoft.EntityFrameworkCore.Relational 9.0.0 was resolved.",
       "libraryId": "Microsoft.EntityFrameworkCore.Relational",
       "targetGraphs": [
         "net8.0"

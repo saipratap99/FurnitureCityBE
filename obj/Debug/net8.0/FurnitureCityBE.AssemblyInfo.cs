@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FurnitureCityBE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e6b44caed58f50854eaed305533c09967bb4ad6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f06fcaa00fcb32c59eb04248e104d8317e1723b")]
 [assembly: System.Reflection.AssemblyProductAttribute("FurnitureCityBE")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FurnitureCityBE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
