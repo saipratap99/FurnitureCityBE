@@ -1,19 +1,20 @@
 using FurnitureCityBE.Models;
+using FurnitureCityBE.Repositories;
 using Microsoft.EntityFrameworkCore;
 using MySql.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var x = builder.Configuration["db:MySqlDevEnv"];
 
-    
+
 builder.Services.AddDbContext<FurnitureStoreDb>(options =>
 {
     // options.UseMySql(builder.Configuration["db:MySqlDevEnv"], new MySqlServerVersion(new Version(8, 0, 21)));

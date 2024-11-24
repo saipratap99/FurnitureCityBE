@@ -10,6 +10,6 @@ public class SubCategory
     [MaxLength(100)]
     public string Name { get; set; }
 
-    public ICollection<CategorySubCategoryMapping> CategorySubCategoryMappings { get; set; }
-    public ICollection<Product> Products { get; set; }
+    public ICollection<CategorySubCategoryMapping>? CategorySubCategoryMappings { get; set; }
+    public ICollection<Product>? Products { get; set; }
 }

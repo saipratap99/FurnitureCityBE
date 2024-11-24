@@ -21,7 +21,7 @@ public class Order
     [ForeignKey("UserId")]
     public User User { get; set; }
 
-    public ICollection<OrderItem> OrderItems { get; set; }
-    public ICollection<ShipmentStatus> ShipmentStatuses { get; set; }
+    public ICollection<OrderItem>? OrderItems { get; set; }
+    public ICollection<ShipmentStatus>? ShipmentStatuses { get; set; }
     public Invoice Invoice { get; set; }
 }

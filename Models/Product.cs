@@ -28,8 +28,8 @@ namespace FurnitureCityBE.Models
     [ForeignKey("SubCategoryId")]
     public SubCategory SubCategory { get; set; }
 
-    public ICollection<ProductImage> ProductImages { get; set; }
-    public ICollection<ProductTagsMapping> ProductTagsMappings { get; set; }
-    public ICollection<ProductReview> ProductReviews { get; set; }
+    public ICollection<ProductImage>? ProductImages { get; set; }
+    public ICollection<ProductTagsMapping>? ProductTagsMappings { get; set; }
+    public ICollection<ProductReview>? ProductReviews { get; set; }
   }
 }

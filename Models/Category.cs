@@ -11,5 +11,5 @@ public class Category
     [MaxLength(100)]
     public string Name { get; set; }
 
-    public ICollection<CategorySubCategoryMapping> CategorySubCategoryMappings { get; set; }
+    public ICollection<CategorySubCategoryMapping>? CategorySubCategoryMappings { get; set; }
 }

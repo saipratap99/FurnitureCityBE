@@ -25,6 +25,6 @@ public class User
     [MaxLength(50)]
     public string Role { get; set; }
 
-    public ICollection<SavedAddress> SavedAddresses { get; set; }
-    public ICollection<Order> Orders { get; set; }
+    public ICollection<SavedAddress>? SavedAddresses { get; set; }
+    public ICollection<Order>? Orders { get; set; }
 }

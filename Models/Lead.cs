@@ -20,5 +20,5 @@ public class Lead
     [ForeignKey("ContactUsId")]
     public ContactUs ContactUs { get; set; }
 
-    public ICollection<LeadHistory> LeadHistories { get; set; }
+    public ICollection<LeadHistory>? LeadHistories { get; set; }
 }
