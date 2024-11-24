@@ -1,7 +1,8 @@
 namespace FurnitureCityBE.Models;
 using System.ComponentModel.DataAnnotations;
 
-public class SubCategory
+
+public class Category
 {
     [Key]
     public Guid Id { get; set; }
@@ -11,5 +12,4 @@ public class SubCategory
     public string Name { get; set; }
 
     public ICollection<CategorySubCategoryMapping> CategorySubCategoryMappings { get; set; }
-    public ICollection<Product> Products { get; set; }
 }
