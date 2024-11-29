@@ -9,27 +9,27 @@ namespace FurnitureCityBE.Controllers
     public class CategoryController:  ControllerBase
     {
         private readonly FurnitureStoreDb _dbContext;
-        private readonly GenericRepository<Category> _categoryRepository;
+        private readonly GenericRepository<Category> _repository;
 
         public CategoryController(FurnitureStoreDb dbContext)
         {
             _dbContext = dbContext;
-            _categoryRepository = new GenericRepository<Category>(dbContext);
+            _repository = new GenericRepository<Category>(dbContext);
         }
 
         [HttpGet]
         [Route("")]
         public async Task<ActionResult<List<Category>>> Index()
         {
-            return Ok(await _categoryRepository.GetAll());
+            return Ok(await _repository.GetAll());
         }
 
         [HttpPost]
         [Route("[Action]")]
         public async Task<ActionResult<object>> Create(Category category)
         {
-            _categoryRepository.Add(category);
-            await _categoryRepository.Savechange();
+            _repository.Add(category);
+            await _repository.Savechange();
             return Ok(category);
         }
 
@@ -37,8 +37,7 @@ namespace FurnitureCityBE.Controllers
         [Route("[Action]/{id}")]
         public async Task<ActionResult<Category>> Get(Guid id)
         {
-            
-            return Ok(await _categoryRepository.GetById(id));
+            return Ok(await _repository.GetById(id));
         }
     }
 }

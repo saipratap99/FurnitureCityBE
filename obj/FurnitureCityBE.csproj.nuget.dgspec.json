@@ -13,6 +13,7 @@
         "packagesPath": "/Users/saipratap/.nuget/packages/",
         "outputPath": "/Users/saipratap/PE/FurnitureStore/FurnitureCityBE/obj/",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/Users/saipratap/.nuget/NuGet/NuGet.Config"
         ],
