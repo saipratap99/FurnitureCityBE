@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
 namespace FurnitureCityBE.Models;
 
 public class CategorySubCategoryMapping
@@ -8,12 +10,13 @@ public class CategorySubCategoryMapping
     public Guid sub_cat_id { get; set; }
 
     [Required]
-    public Guid category_id { get; set; }
-    [ForeignKey("category_id")]
-    public Category Category { get; set; }
+    public Guid CategoryId { get; set; }
+    [ForeignKey("CategoryId")]
+    public Category? Category { get; set; }
 
     [Required]
-    public Guid subcategory_id { get; set; }
-    [ForeignKey("subcategory_id")]
-    public SubCategory SubCategory { get; set; }
+    public Guid SubCategoryId { get; set; }
+    
+    [ForeignKey("SubCategoryId")]
+    public SubCategory? SubCategory { get; set; }
 }

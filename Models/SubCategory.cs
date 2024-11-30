@@ -10,9 +10,5 @@ public class SubCategory
     public string name { get; set; }
 
     //public ICollection<CategorySubCategoryMapping>? CategorySubCategoryMappings { get; set; }
-<<<<<<< Updated upstream
-    //public ICollection<Product>? Products { get; set; }
-=======
     public ICollection<Product>? Products { get; set; }
->>>>>>> Stashed changes
 }

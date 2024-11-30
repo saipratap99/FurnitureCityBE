@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FurnitureCityBE.Migrations
 {
     [DbContext(typeof(FurnitureStoreDb))]
-    [Migration("20241124062901_InitialCreateOfSchema")]
-    partial class InitialCreateOfSchema
+    [Migration("20241130180553_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,6 +72,23 @@ namespace FurnitureCityBE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e06629eb-de6b-41e1-b4e9-01d6bac0a3c0"),
+                            Name = "Living Room"
+                        },
+                        new
+                        {
+                            Id = new Guid("94d4fdb7-b1b7-4b42-aea4-08dc058baf26"),
+                            Name = "Bedroom"
+                        },
+                        new
+                        {
+                            Id = new Guid("44a1f781-0906-45a0-888f-041790c7603f"),
+                            Name = "Office"
+                        });
                 });
 
             modelBuilder.Entity("FurnitureCityBE.Models.CategorySubCategoryMapping", b =>
@@ -244,12 +261,17 @@ namespace FurnitureCityBE.Migrations
                     b.Property<Guid>("OrderId")
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("char(36)");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
                 });
@@ -357,6 +379,23 @@ namespace FurnitureCityBE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductTags");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("dc323bcf-4a3a-4c36-9919-2fd0cb5b4766"),
+                            Name = "Modern"
+                        },
+                        new
+                        {
+                            Id = new Guid("fbc54077-f6d0-4e07-9974-cfbd51a9349f"),
+                            Name = "Luxury"
+                        },
+                        new
+                        {
+                            Id = new Guid("32a5340c-5189-4e3d-88f5-f69d876287b9"),
+                            Name = "Ergonomic"
+                        });
                 });
 
             modelBuilder.Entity("FurnitureCityBE.Models.ProductTagsMapping", b =>
@@ -455,6 +494,23 @@ namespace FurnitureCityBE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SubCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f106601e-296d-4c77-a7f3-522015498e3c"),
+                            Name = "Sofas"
+                        },
+                        new
+                        {
+                            Id = new Guid("836856cc-e6bc-4acd-9dcb-eb18da4f2b10"),
+                            Name = "Beds"
+                        },
+                        new
+                        {
+                            Id = new Guid("91cc1981-42f6-4176-854b-c06a6f12fd31"),
+                            Name = "Desks"
+                        });
                 });
 
             modelBuilder.Entity("FurnitureCityBE.Models.Testimonial", b =>
@@ -522,6 +578,17 @@ namespace FurnitureCityBE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("cf7cc03c-172f-4b11-882d-e463796a1a40"),
+                            Email = "test@test.com",
+                            Mobile = "234565432",
+                            Name = "test",
+                            Password = "test",
+                            Role = "USER"
+                        });
                 });
 
             modelBuilder.Entity("FurnitureCityBE.Models.CategorySubCategoryMapping", b =>
@@ -595,7 +662,15 @@ namespace FurnitureCityBE.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FurnitureCityBE.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Order");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("FurnitureCityBE.Models.Product", b =>
