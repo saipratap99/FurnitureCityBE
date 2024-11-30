@@ -37,7 +37,36 @@ namespace FurnitureCityBE.Controllers
         [Route("[Action]/{id}")]
         public async Task<ActionResult<Category>> Get(Guid id)
         {
-            return Ok(await _repository.GetById(id));
+            var category = await _repository.GetById(id);
+            if (category == null)
+                return NotFound("Category not found");
+            return Ok();
+        }
+        
+        [HttpPut]
+        [Route("[Action]/{id}")]
+        public async Task<ActionResult<Category>> Update(Guid id, Category category)
+        {
+            var categoryItem = await _repository.GetById(id);
+            if (categoryItem == null)
+                return NotFound("Category not found");
+            categoryItem.Id = id;
+            categoryItem.Name = category.Name;
+            _repository.Edit(categoryItem);
+            await _repository.Savechange();
+            return Ok("Category updated");
+        }
+        
+        [HttpDelete]
+        [Route("[Action]/{id}")]
+        public async Task<ActionResult<Category>> Delete(Guid id)
+        {
+            var categoryItem = await _repository.GetById(id);
+            if (categoryItem == null)
+                return NotFound("Category not found");
+            _repository.Del(id);
+            await _repository.Savechange();
+            return Ok("Category Deleted");
         }
     }
 }

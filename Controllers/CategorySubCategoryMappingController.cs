@@ -6,26 +6,22 @@ namespace FurnitureCityBE.Controllers;
 
 [Route("api/v1/[controller]")]
 [ApiController]
-public class SubCategoryController: ControllerBase
+public class CategorySubCategoryMappingController(FurnitureStoreDb dbContext) : ControllerBase
 {
-    private readonly FurnitureStoreDb _dbContext;
-    private readonly GenericRepository<SubCategory> _repository;
+    private readonly FurnitureStoreDb _dbContext = dbContext;
+    private readonly GenericRepository<CategorySubCategoryMapping> _repository = new(dbContext);
     
-    public SubCategoryController(FurnitureStoreDb dbContext)
-    {
-        _dbContext = dbContext;
-        _repository = new GenericRepository<SubCategory>(dbContext);
-    }
+    
     [HttpGet]
     [Route("")]
-    public async Task<ActionResult<List<SubCategory>>> Index()
+    public async Task<ActionResult<List<CategorySubCategoryMapping>>> Index()
     {
         return Ok(await _repository.GetAll());
     }
 
     [HttpPost]
     [Route("[Action]")]
-    public async Task<ActionResult<object>> Create(SubCategory subCategory)
+    public async Task<ActionResult<object>> Create(CategorySubCategoryMapping subCategory)
     {
         _repository.Add(subCategory);
         await _repository.Savechange();
@@ -34,20 +30,18 @@ public class SubCategoryController: ControllerBase
 
     [HttpGet]
     [Route("[Action]/{id}")]
-    public async Task<ActionResult<SubCategory>> Get(Guid id)
+    public async Task<ActionResult<CategorySubCategoryMapping>> Get(Guid id)
     {
         return Ok(await _repository.GetById(id));
     }
     
     [HttpPut]
     [Route("[Action]/{id}")]
-    public async Task<ActionResult<SubCategory>> Update(Guid id, SubCategory subCategory)
+    public async Task<ActionResult<CategorySubCategoryMapping>> Update(Guid id, CategorySubCategoryMapping subCategory)
     {
         var categoryItem = await _repository.GetById(id);
         if (categoryItem == null)
             return NotFound("Category not found");
-        categoryItem.Id = id;
-        categoryItem.Name = subCategory.Name;
         _repository.Edit(categoryItem);
         await _repository.Savechange();
         return Ok("Sub-Category updated");
@@ -55,7 +49,7 @@ public class SubCategoryController: ControllerBase
         
     [HttpDelete]
     [Route("[Action]/{id}")]
-    public async Task<ActionResult<SubCategory>> Delete(Guid id)
+    public async Task<ActionResult<CategorySubCategoryMapping>> Delete(Guid id)
     {
         var categoryItem = await _repository.GetById(id);
         if (categoryItem == null)
@@ -65,3 +59,4 @@ public class SubCategoryController: ControllerBase
         return Ok("Sub-Category Deleted");
     }
 }
+
