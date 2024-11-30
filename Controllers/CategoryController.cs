@@ -1,6 +1,7 @@
 using FurnitureCityBE.Models;
 using FurnitureCityBE.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FurnitureCityBE.Controllers
 {
@@ -21,7 +22,23 @@ namespace FurnitureCityBE.Controllers
         [Route("")]
         public async Task<ActionResult<List<Category>>> Index()
         {
-            return Ok(await _repository.GetAll());
+            var categories = await _dbContext.Categories.Include(category => category.CategorySubCategoryMappings) // Load mappings
+                .ThenInclude(mapping => mapping.SubCategory) // Load related subcategories
+                .ToListAsync();
+
+            // Map to DTOs to prevent circular references and simplify the response
+            var categoryDtos = categories.Select(category => new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name,
+                SubCategories = category.CategorySubCategoryMappings.Select(mapping => new SubCategoryDto
+                {
+                    Id = mapping.SubCategory.Id,
+                    Name = mapping.SubCategory.Name
+                }).ToList()
+            }).ToList();
+
+            return Ok(categoryDtos);
         }
 
         [HttpPost]

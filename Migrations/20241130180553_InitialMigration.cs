@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace FurnitureCityBE.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateOfSchema : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -385,7 +387,8 @@ namespace FurnitureCityBE.Migrations
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     OrderId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -394,6 +397,12 @@ namespace FurnitureCityBE.Migrations
                         name: "FK_OrderItems_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -418,6 +427,41 @@ namespace FurnitureCityBE.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("44a1f781-0906-45a0-888f-041790c7603f"), "Office" },
+                    { new Guid("94d4fdb7-b1b7-4b42-aea4-08dc058baf26"), "Bedroom" },
+                    { new Guid("e06629eb-de6b-41e1-b4e9-01d6bac0a3c0"), "Living Room" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductTags",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("32a5340c-5189-4e3d-88f5-f69d876287b9"), "Ergonomic" },
+                    { new Guid("dc323bcf-4a3a-4c36-9919-2fd0cb5b4766"), "Modern" },
+                    { new Guid("fbc54077-f6d0-4e07-9974-cfbd51a9349f"), "Luxury" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SubCategories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("836856cc-e6bc-4acd-9dcb-eb18da4f2b10"), "Beds" },
+                    { new Guid("91cc1981-42f6-4176-854b-c06a6f12fd31"), "Desks" },
+                    { new Guid("f106601e-296d-4c77-a7f3-522015498e3c"), "Sofas" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Email", "Mobile", "Name", "Password", "Role" },
+                values: new object[] { new Guid("cf7cc03c-172f-4b11-882d-e463796a1a40"), "test@test.com", "234565432", "test", "test", "USER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CategorySubCategoryMappings_CategoryId",
@@ -449,6 +493,11 @@ namespace FurnitureCityBE.Migrations
                 name: "IX_OrderItems_OrderId",
                 table: "OrderItems",
                 column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_ProductId",
+                table: "OrderItems",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",
