@@ -5,25 +5,25 @@ namespace FurnitureCityBE.Models;
 public class User
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid user_id { get; set; }
 
     [Required]
     [MaxLength(100)]
-    public string Name { get; set; }
+    public string name { get; set; }
 
     [Required]
     [MaxLength(15)]
-    public string Mobile { get; set; }
+    public string mobile { get; set; }
 
     [Required]
     [EmailAddress]
-    public string Email { get; set; }
+    public string email { get; set; }
 
     [Required]
-    public string Password { get; set; }
+    public string password { get; set; }
 
     [MaxLength(50)]
-    public string Role { get; set; }
+    public string role { get; set; }
 
     public ICollection<SavedAddress>? SavedAddresses { get; set; }
     public ICollection<Order>? Orders { get; set; }

@@ -6,15 +6,15 @@ namespace FurnitureCityBE.Models;
 public class ProductTagsMapping
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid prod_prodTag_id { get; set; }
 
     [Required]
-    public Guid ProductId { get; set; }
-    [ForeignKey("ProductId")]
+    public Guid product_id { get; set; }
+    [ForeignKey("product_id")]
     public Product Product { get; set; }
 
     [Required]
-    public Guid ProductTagId { get; set; }
-    [ForeignKey("ProductTagId")]
+    public Guid product_tag_id { get; set; }
+    [ForeignKey("product_tag_id")]
     public ProductTag ProductTag { get; set; }
 }

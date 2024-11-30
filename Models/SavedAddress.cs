@@ -6,15 +6,15 @@ namespace FurnitureCityBE.Models;
 public class SavedAddress
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid saved_address_id { get; set; }
 
     [Required]
-    public Guid UserId { get; set; }
-    [ForeignKey("UserId")]
+    public Guid user_id { get; set; }
+    [ForeignKey("user_id")]
     public User User { get; set; }
 
     [Required]
-    public Guid AddressId { get; set; }
-    [ForeignKey("AddressId")]
+    public Guid address_id { get; set; }
+    [ForeignKey("address_id")]
     public Address Address { get; set; }
 }

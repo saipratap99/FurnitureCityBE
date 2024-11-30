@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations;
 public class Category
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid category_id { get; set; }
 
     [Required]
     [MaxLength(100)]
-    public string Name { get; set; }
+    public string name { get; set; }
 
     public ICollection<CategorySubCategoryMapping>? CategorySubCategoryMappings { get; set; }
 }

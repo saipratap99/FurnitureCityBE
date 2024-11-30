@@ -6,25 +6,25 @@ namespace FurnitureCityBE.Models;
 public class Invoice
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid invoice_id { get; set; }
 
-    public DateTime Date { get; set; }
+    public DateTime date { get; set; }
 
     [Required]
     [MaxLength(50)]
-    public string InvoiceNumber { get; set; }
+    public string number { get; set; }
 
-    [Range(0.01, double.MaxValue)]
-    public decimal NetAmount { get; set; }
+    //[Range(0.01, double.MaxValue)]
+    //public decimal NetAmount { get; set; }
 
     [Range(0.00, double.MaxValue)]
-    public decimal TaxAmount { get; set; }
+    public decimal tax { get; set; }
 
     [Range(0.01, double.MaxValue)]
-    public decimal TotalAmount { get; set; }
-
+    public decimal totalAmount { get; set; }
+    
     [Required]
-    public Guid OrderId { get; set; }
-    [ForeignKey("OrderId")]
+    public Guid order_id { get; set; }
+    [ForeignKey("order_id")]
     public Order Order { get; set; }
 }

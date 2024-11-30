@@ -6,9 +6,13 @@ namespace FurnitureCityBE.Models;
 public class ProductTag
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid product_tag_id { get; set; }
 
     [Required]
     [MaxLength(100)]
-    public string Name { get; set; }
+    public string name { get; set; }
+    
+    public Guid retailer_id { get; set; }
+    [ForeignKey("retailer_id")]
+    public Retailer Retailer { get; set; }
 }

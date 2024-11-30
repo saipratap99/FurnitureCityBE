@@ -6,12 +6,12 @@ namespace FurnitureCityBE.Models;
 public class StoreLocation
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid store_location_id { get; set; }
 
     [Required]
-    public Guid AddressId { get; set; }
-    [ForeignKey("AddressId")]
+    public Guid address_id { get; set; }
+    [ForeignKey("address_id")]
     public Address Address { get; set; }
 
-    public DateTime StoreStartDate { get; set; }
+    public DateTime storeStartDate { get; set; }
 }

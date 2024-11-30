@@ -35,9 +35,9 @@ namespace FurnitureCityBE.Controllers
 
         [HttpGet]
         [Route("[Action]/{id}")]
-        public async Task<ActionResult<Category>> Get(Guid id)
+        public async Task<ActionResult<Category>> Get(Guid subcategory_id)
         {
-            return Ok(await _repository.GetById(id));
+            return Ok(await _repository.GetById(subcategory_id));
         }
     }
 }

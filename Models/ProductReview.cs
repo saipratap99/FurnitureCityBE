@@ -7,21 +7,21 @@ namespace FurnitureCityBE.Models;
 public class ProductReview
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid review_id { get; set; }
 
     [MaxLength(500)]
-    public string Comments { get; set; }
+    public string comments { get; set; }
 
     [Range(1, 5)]
-    public int Rating { get; set; }
+    public int rating { get; set; }
 
     [Required]
-    public Guid ProductId { get; set; }
-    [ForeignKey("ProductId")]
+    public Guid product_id { get; set; }
+    [ForeignKey("product_id")]
     public Product Product { get; set; }
 
     [Required]
-    public Guid UserId { get; set; }
-    [ForeignKey("UserId")]
+    public Guid user_id { get; set; }
+    [ForeignKey("user_id")]
     public User User { get; set; }
 }

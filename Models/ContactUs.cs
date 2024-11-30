@@ -1,22 +1,27 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FurnitureCityBE.Models;
 public class ContactUs
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid contact_id { get; set; }
 
     [Required]
     [MaxLength(100)]
-    public string Name { get; set; }
+    public string name { get; set; }
 
     [Required]
     [EmailAddress]
-    public string Email { get; set; }
+    public string email { get; set; }
 
     [Required]
     [MaxLength(200)]
-    public string Subject { get; set; }
+    public string subject { get; set; }
 
-    public string Description { get; set; }
+    public string description { get; set; }
+    
+    public Guid user_id { get; set; }
+    [ForeignKey("user_id")]
+    public Order User { get; set; }
 }

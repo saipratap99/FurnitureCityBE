@@ -5,15 +5,15 @@ namespace FurnitureCityBE.Models;
 public class CategorySubCategoryMapping
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid sub_cat_id { get; set; }
 
     [Required]
-    public Guid CategoryId { get; set; }
-    [ForeignKey("CategoryId")]
+    public Guid category_id { get; set; }
+    [ForeignKey("category_id")]
     public Category Category { get; set; }
 
     [Required]
-    public Guid SubCategoryId { get; set; }
-    [ForeignKey("SubCategoryId")]
+    public Guid subcategory_id { get; set; }
+    [ForeignKey("subcategory_id")]
     public SubCategory SubCategory { get; set; }
 }

@@ -6,14 +6,19 @@ namespace FurnitureCityBE.Models;
 public class ShipmentStatus
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid shipment_id { get; set; }
 
     [Required]
     [MaxLength(50)]
-    public string Status { get; set; }
+    public string status { get; set; }
+    
+    [Required]
+    public Guid address_id { get; set; }
+    [ForeignKey("address_id")]
+    public Order Address { get; set; }
 
     [Required]
-    public Guid OrderId { get; set; }
-    [ForeignKey("OrderId")]
+    public Guid order_id { get; set; }
+    [ForeignKey("order_id")]
     public Order Order { get; set; }
 }

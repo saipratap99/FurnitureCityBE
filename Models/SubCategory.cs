@@ -3,13 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 public class SubCategory
 {
-    [Key]
-    public Guid Id { get; set; }
+    [Key][Required] public Guid subcategory_id { get; set; } 
 
     [Required]
     [MaxLength(100)]
-    public string Name { get; set; }
+    public string name { get; set; }
 
-    public ICollection<CategorySubCategoryMapping>? CategorySubCategoryMappings { get; set; }
-    public ICollection<Product>? Products { get; set; }
+    //public ICollection<CategorySubCategoryMapping>? CategorySubCategoryMappings { get; set; }
+    //public ICollection<Product>? Products { get; set; }
 }

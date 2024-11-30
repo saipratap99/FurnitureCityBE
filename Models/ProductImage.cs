@@ -6,16 +6,16 @@ namespace FurnitureCityBE.Models;
 public class ProductImage
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid p_image_id { get; set; }
 
     [Required]
-    public string ImageUrl { get; set; }
+    public string imageUrl { get; set; }
 
     [MaxLength(200)]
-    public string AltText { get; set; }
+    public string altText { get; set; }
 
     [Required]
-    public Guid ProductId { get; set; }
-    [ForeignKey("ProductId")]
+    public Guid product_id { get; set; }
+    [ForeignKey("product_id")]
     public Product Product { get; set; }
 }
