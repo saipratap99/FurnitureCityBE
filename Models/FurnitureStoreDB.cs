@@ -30,181 +30,6 @@ namespace FurnitureCityBE.Models
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Lead> Leads { get; set; }
 
-<<<<<<< Updated upstream
-        public DbSet<LeadHistory> LeadHistories { get; set; }
-
-<<<<<<< HEAD
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            var livingRoomCategoryId = new Category
-                { category_id = new Guid("e06629eb-de6b-41e1-b4e9-01d6bac0a3c0"), name = "Living Room" };
-            var bedroomCategoryId = new Category
-                { category_id = new Guid("94d4fdb7-b1b7-4b42-aea4-08dc058baf26"), name = "Bedroom" };
-            var officeCategoryId = new Category
-                { category_id = new Guid("44a1f781-0906-45a0-888f-041790c7603f"), name = "Office" };
-            // Seed Categories
-            modelBuilder.Entity<Category>().HasData(
-                livingRoomCategoryId,
-                bedroomCategoryId,
-                officeCategoryId
-            );
-
-            var sofasSubCategoryId = new SubCategory
-                { subcategory_id = new Guid("f106601e-296d-4c77-a7f3-522015498e3c"), name = "Sofas" };
-            var bedsSubCategoryId = new SubCategory
-                { subcategory_id = new Guid("836856cc-e6bc-4acd-9dcb-eb18da4f2b10"), name = "Beds" };
-            var desksSubCategoryId = new SubCategory
-                { subcategory_id = new Guid("91cc1981-42f6-4176-854b-c06a6f12fd31"), name = "Desks" };
-            // Seed SubCategories
-            modelBuilder.Entity<SubCategory>().HasData(
-                sofasSubCategoryId,
-                bedsSubCategoryId,
-                desksSubCategoryId
-            );
-
-             modelBuilder.Entity<CategorySubCategoryMapping>().HasData(
-            new CategorySubCategoryMapping
-              {
-                sub_cat_id = Guid.NewGuid(), subcategory_id = sofasSubCategoryId.subcategory_id, category_id = livingRoomCategoryId.category_id
-              },
-             new CategorySubCategoryMapping{sub_cat_id = Guid.NewGuid(), subcategory_id = sofasSubCategoryId.subcategory_id, category_id = bedroomCategoryId.category_id},
-            new CategorySubCategoryMapping{sub_cat_id = Guid.NewGuid(), subcategory_id = sofasSubCategoryId.subcategory_id, category_id = officeCategoryId.category_id},
-            new CategorySubCategoryMapping{sub_cat_id = Guid.NewGuid(), subcategory_id = desksSubCategoryId.subcategory_id, category_id = bedroomCategoryId.category_id},
-              new CategorySubCategoryMapping{sub_cat_id = Guid.NewGuid(), subcategory_id = desksSubCategoryId.subcategory_id, category_id = officeCategoryId.category_id},
-            new CategorySubCategoryMapping{sub_cat_id = Guid.NewGuid(), subcategory_id = bedsSubCategoryId.subcategory_id, category_id = bedroomCategoryId.category_id});
-
-
-
-      // Seed Products
-      modelBuilder.Entity<Product>().HasData(
-        new Product
-        {
-          product_id = Guid.NewGuid(),
-          name = "Modern Sofa",
-          description = "A stylish modern sofa for your living room.",
-          isActive = true,
-          quantity = 10,
-          price = 599.99M,
-          subcategory_id = sofasSubCategoryId.subcategory_id
-        },
-        new Product
-        {
-          product_id = Guid.NewGuid(),
-          name = "King Size Bed",
-          description = "A spacious and comfortable king-size bed.",
-          isActive = true,
-          quantity = 5,
-          price = 799.99M,
-          subcategory_id = bedsSubCategoryId.subcategory_id
-        },
-        new Product
-        {
-          product_id = Guid.NewGuid(),
-          name = "Ergonomic Office Desk",
-          description = "A height-adjustable ergonomic desk for your office.",
-          isActive = true,
-          quantity = 8,
-          price = 299.99M,
-          subcategory_id = desksSubCategoryId.subcategory_id
-        },
-        // Living Room - Sofas
-        new Product
-        {
-            product_id = Guid.NewGuid(),
-            name = "Modern Leather Sofa",
-            description = "A sleek leather sofa that adds sophistication to any living room.",
-            isActive = true,
-            quantity = 15,
-            price = 799.99M,
-            subcategory_id = sofasSubCategoryId.subcategory_id
-        },
-        new Product
-        {
-            product_id = Guid.NewGuid(),
-            name = "Sectional Fabric Sofa",
-            description = "A spacious and comfortable sectional sofa perfect for family gatherings.",
-            isActive = true,
-            quantity = 10,
-            price = 899.99M,
-            subcategory_id = sofasSubCategoryId.subcategory_id
-        },
-        new Product
-        {
-            product_id = Guid.NewGuid(),
-            name = "Convertible Sofa Bed",
-            description = "A multi-functional sofa bed with a contemporary design.",
-            isActive = true,
-            quantity = 8,
-            price = 499.99M,
-            subcategory_id = sofasSubCategoryId.subcategory_id
-        },
-
-        // Bedroom - Beds
-        new Product
-        {
-            product_id = Guid.NewGuid(),
-            name = "Queen Size Wooden Bed",
-            description = "A solid wooden bed frame with a classic finish.",
-            isActive = true,
-            quantity = 20,
-            price = 699.99M,
-            subcategory_id = bedsSubCategoryId.subcategory_id
-        },
-        new Product
-        {
-            product_id = Guid.NewGuid(),
-            name = "King Size Upholstered Bed",
-            description = "A luxurious bed with a tufted headboard and sturdy build.",
-            isActive = true,
-            quantity = 10,
-            price = 999.99M,
-            subcategory_id = bedsSubCategoryId.subcategory_id
-        },
-        new Product
-        {
-            product_id = Guid.NewGuid(),
-            name = "Bunk Bed with Storage",
-            description = "Perfect for kids, this bunk bed includes under-bed storage drawers.",
-            isActive = true,
-            quantity = 5,
-            price = 799.99M,
-            subcategory_id = bedsSubCategoryId.subcategory_id
-        },
-
-        // Office - Desks
-        new Product
-        {
-            product_id = Guid.NewGuid(),
-            name = "Adjustable Standing Desk",
-            description = "A height-adjustable desk designed for ergonomic office setups.",
-            isActive = true,
-            quantity = 12,
-            price = 399.99M,
-            subcategory_id = desksSubCategoryId.subcategory_id
-        },
-        new Product
-        {
-            product_id = Guid.NewGuid(),
-            name = "Executive Wooden Desk",
-            description = "A spacious executive desk with a rich mahogany finish.",
-            isActive = true,
-            quantity = 7,
-            price = 899.99M,
-            subcategory_id = desksSubCategoryId.subcategory_id
-        },
-        new Product
-        {
-            product_id = Guid.NewGuid(),
-            name = "Compact Computer Desk",
-            description = "A minimalist computer desk with a sleek design.",
-            isActive = true,
-            quantity = 20,
-            price = 199.99M,
-            subcategory_id = desksSubCategoryId.subcategory_id
-        }
-      );
-=======
       var sofasSubCategoryId = new SubCategory { Id = new Guid("f106601e-296d-4c77-a7f3-522015498e3c"), Name = "Sofas" };
       var bedsSubCategoryId = new SubCategory { Id = new Guid("836856cc-e6bc-4acd-9dcb-eb18da4f2b10"), Name = "Beds" };
       var desksSubCategoryId = new SubCategory { Id = new Guid("91cc1981-42f6-4176-854b-c06a6f12fd31"), Name = "Desks" };
@@ -360,7 +185,6 @@ namespace FurnitureCityBE.Models
       //       SubCategoryId = desksSubCategoryId.Id
       //   }
       // );
->>>>>>> main
 
       // Seed Product Tags
       modelBuilder.Entity<ProductTag>().HasData(
@@ -379,7 +203,7 @@ namespace FurnitureCityBE.Models
             // Seed data (if any) can be added here
         }
 
-=======
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -429,7 +253,6 @@ namespace FurnitureCityBE.Models
 
         // Seed Products
 
->>>>>>> Stashed changes
     }
 
 }
