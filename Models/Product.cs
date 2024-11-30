@@ -6,34 +6,30 @@ namespace FurnitureCityBE.Models
   public class Product
   {
     [Key]
-    public Guid product_id { get; set; }
+    public Guid Id { get; set; }
 
     [Required]
     [MaxLength(200)]
-    public string name { get; set; }
+    public string Name { get; set; }
 
     [MaxLength(500)]
-    public string description { get; set; }
+    public string Description { get; set; }
 
-    public bool isActive { get; set; }
+    public bool IsActive { get; set; }
 
     [Range(0, int.MaxValue)]
-    public int quantity { get; set; }
+    public int Quantity { get; set; }
 
     [Range(0.01, double.MaxValue)]
-    public decimal price { get; set; }
+    public decimal Price { get; set; }
 
     [Required]
-    public Guid subcategory_id { get; set; }
-    [ForeignKey("subcategory_id")]
+    public Guid SubCategoryId { get; set; }
+    [ForeignKey("SubCategoryId")]
     public SubCategory SubCategory { get; set; }
-    
-    public Guid retailer_id { get; set; }
-    [ForeignKey("retailer_id")]
-    public Retailer Retailer { get; set; }
 
-    public ICollection<ProductImage> ProductImages { get; set; }
-    public ICollection<ProductTagsMapping> ProductTagsMappings { get; set; }
-    public ICollection<ProductReview> ProductReviews { get; set; }
+    public ICollection<ProductImage>? ProductImages { get; set; }
+    public ICollection<ProductTagsMapping>? ProductTagsMappings { get; set; }
+    public ICollection<ProductReview>? ProductReviews { get; set; }
   }
 }

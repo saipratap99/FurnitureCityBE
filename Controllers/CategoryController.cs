@@ -7,7 +7,7 @@ namespace FurnitureCityBE.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class CategoryController:  ControllerBase
     {
         private readonly FurnitureStoreDb _dbContext;
         private readonly GenericRepository<Category> _repository;
@@ -52,7 +52,7 @@ namespace FurnitureCityBE.Controllers
 
         [HttpGet]
         [Route("[Action]/{id}")]
-        public async Task<ActionResult<Category>> Get(Guid subcategory_id)
+        public async Task<ActionResult<Category>> Get(Guid id)
         {
             var category = await _repository.GetById(id);
             if (category == null)
@@ -85,37 +85,5 @@ namespace FurnitureCityBE.Controllers
             await _repository.Savechange();
             return Ok("Category Deleted");
         }
-
-        // New method to get subcategories by category ID using the mapping
-        [HttpGet]
-        [Route("GetSubcategories/{categoryName}")]
-        public async Task<ActionResult<List<SubCategory>>> GetSubcategories(string categoryName)
-        {
-         
-            // Fetch the category by its name
-            var category = await _dbContext.Categories
-                .FirstOrDefaultAsync(c => c.Name == categoryName);
-           // Console.WriteLine(categoryName);
-           Console.WriteLine(category);
-            if (category == null)
-            {
-                return NotFound("Category not found.");
-            }
-
-            // Fetch subcategory mappings for the category
-            var subcategoryMappings = await _dbContext.CategorySubCategoryMappings
-                .Where(mapping => mapping.CategoryId == category.Id)
-                .Include(mapping => mapping.SubCategory)
-                .ToListAsync();
-
-            if (subcategoryMappings == null || !subcategoryMappings.Any())
-            {
-                return NotFound("No subcategories found for the given category.");
-            }
-
-            var subcategories = subcategoryMappings.Select(mapping => mapping.SubCategory).ToList();
-            return Ok(subcategories);
-        }
-
     }
 }

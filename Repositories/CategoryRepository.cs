@@ -27,7 +27,7 @@ public class CategoryRepository: ICategoryRepository
 
     public async Task<Category> GetCategoryByIdAsync(Guid categoryId)
     {
-        var category = await _context.Categories.FirstOrDefaultAsync(category => category.category_id == categoryId);
+        var category = await _context.Categories.FirstOrDefaultAsync(category => category.Id == categoryId);
 
         if (category == null)
             throw new NotFoundException($"Category with id {categoryId} not found");

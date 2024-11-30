@@ -6,17 +6,22 @@ namespace FurnitureCityBE.Models;
 public class Order
 {
     [Key]
-    public Guid order_id { get; set; }
+    public Guid Id { get; set; }
 
     [Required]
     [MaxLength(50)]
-    public string orderStatus { get; set; }
+    public string Status { get; set; }
 
+    [Required]
     [MaxLength(50)]
-    public string deliveryMethod { get; set; }
-    public DateTime orderDate { get; set; }
-    
+    public string OrderId { get; set; }
+
+    [Required]
+    public Guid UserId { get; set; }
+    [ForeignKey("UserId")]
+    public User User { get; set; }
+
     public ICollection<OrderItem>? OrderItems { get; set; }
-    //public ICollection<ShipmentStatus>? ShipmentStatusCollection { get; set; }
+    public ICollection<ShipmentStatus>? ShipmentStatuses { get; set; }
     public Invoice Invoice { get; set; }
 }

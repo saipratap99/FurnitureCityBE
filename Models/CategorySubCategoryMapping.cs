@@ -7,7 +7,7 @@ namespace FurnitureCityBE.Models;
 public class CategorySubCategoryMapping
 {
     [Key]
-    public Guid sub_cat_id { get; set; }
+    public Guid Id { get; set; }
 
     [Required]
     public Guid CategoryId { get; set; }

@@ -5,24 +5,23 @@ namespace FurnitureCityBE.Models;
 public class Address
 {
     [Key]
-    public Guid address_id { get; set; }
+    public Guid Id { get; set; }
 
     [MaxLength(50)]
-    public string aptNo { get; set; }
+    public string AppartmentNo { get; set; }
 
     [MaxLength(100)]
-    public string road { get; set; }
+    public string Road { get; set; }
 
     [Required]
     [MaxLength(50)]
-    public string city { get; set; }
+    public string City { get; set; }
 
     [Required]
     [MaxLength(50)]
-    public string state { get; set; }
+    public string State { get; set; }
 
     [Required]
     [MaxLength(10)]
-    public string zipcode { get; set; }
-    
+    public string Zipcode { get; set; }
 }

@@ -6,15 +6,15 @@ namespace FurnitureCityBE.Models;
 public class LeadHistory
 {
     [Key]
-    public Guid lead_history_id { get; set; }
+    public Guid Id { get; set; }
 
     [MaxLength(500)]
-    public string comment { get; set; }
+    public string Comments { get; set; }
 
-    public DateTime date { get; set; }
+    public DateTime Date { get; set; }
 
     [Required]
-    public Guid leads_id { get; set; }
-    [ForeignKey("leads_id")]
+    public Guid LeadId { get; set; }
+    [ForeignKey("LeadId")]
     public Lead Lead { get; set; }
 }
