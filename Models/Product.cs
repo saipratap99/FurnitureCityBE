@@ -32,8 +32,8 @@ namespace FurnitureCityBE.Models
     [ForeignKey("retailer_id")]
     public Retailer Retailer { get; set; }
 
-    public ICollection<ProductImage>? ProductImages { get; set; }
-    public ICollection<ProductTagsMapping>? ProductTagsMappings { get; set; }
-    public ICollection<ProductReview>? ProductReviews { get; set; }
+    public ICollection<ProductImage> ProductImages { get; set; }
+    public ICollection<ProductTagsMapping> ProductTagsMappings { get; set; }
+    public ICollection<ProductReview> ProductReviews { get; set; }
   }
 }

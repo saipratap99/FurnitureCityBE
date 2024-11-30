@@ -1,6 +1,7 @@
 using FurnitureCityBE.Models;
 using FurnitureCityBE.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FurnitureCityBE.Controllers;
 
@@ -33,4 +34,22 @@ public class ProductController(FurnitureStoreDb dbContext) : ControllerBase
     {
         return Ok(await _repository.GetById(id));
     }
+    
+    
+    [HttpGet]
+    [Route("[Action]/{subCategoryName}")]
+    public async Task<ActionResult<List<Product>>> GetBySubCategoryName(string subCategoryName)
+    {
+        var products = await _dbContext.Products
+            .Where(p => p.SubCategory.Name == subCategoryName)
+            .ToListAsync();
+
+        if (products == null || !products.Any())
+        {
+            return NotFound(new { Message = $"No products found for subcategory: {subCategoryName}" });
+        }
+
+        return Ok(products);
+    }
+
 }

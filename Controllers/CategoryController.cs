@@ -1,12 +1,13 @@
 using FurnitureCityBE.Models;
 using FurnitureCityBE.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FurnitureCityBE.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class CategoryController:  ControllerBase
+    public class CategoryController : ControllerBase
     {
         private readonly FurnitureStoreDb _dbContext;
         private readonly GenericRepository<Category> _repository;
@@ -39,5 +40,37 @@ namespace FurnitureCityBE.Controllers
         {
             return Ok(await _repository.GetById(subcategory_id));
         }
+
+        // New method to get subcategories by category ID using the mapping
+        [HttpGet]
+        [Route("GetSubcategories/{categoryName}")]
+        public async Task<ActionResult<List<SubCategory>>> GetSubcategories(string categoryName)
+        {
+         
+            // Fetch the category by its name
+            var category = await _dbContext.Categories
+                .FirstOrDefaultAsync(c => c.Name == categoryName);
+           // Console.WriteLine(categoryName);
+           Console.WriteLine(category);
+            if (category == null)
+            {
+                return NotFound("Category not found.");
+            }
+
+            // Fetch subcategory mappings for the category
+            var subcategoryMappings = await _dbContext.CategorySubCategoryMappings
+                .Where(mapping => mapping.CategoryId == category.Id)
+                .Include(mapping => mapping.SubCategory)
+                .ToListAsync();
+
+            if (subcategoryMappings == null || !subcategoryMappings.Any())
+            {
+                return NotFound("No subcategories found for the given category.");
+            }
+
+            var subcategories = subcategoryMappings.Select(mapping => mapping.SubCategory).ToList();
+            return Ok(subcategories);
+        }
+
     }
 }
