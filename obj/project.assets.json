@@ -4136,19 +4136,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< Updated upstream
-      "projectUniqueName": "/Users/bhanu/Documents/Otherwork/pratap/fdb/backend/FurnitureCityBE/FurnitureCityBE.csproj",
-      "projectName": "FurnitureCityBE",
-      "projectPath": "/Users/bhanu/Documents/Otherwork/pratap/fdb/backend/FurnitureCityBE/FurnitureCityBE.csproj",
-      "packagesPath": "/Users/bhanu/.nuget/packages/",
-      "outputPath": "/Users/bhanu/Documents/Otherwork/pratap/fdb/backend/FurnitureCityBE/obj/",
-=======
       "projectUniqueName": "/Users/bhanu/Documents/Otherwork/pratap/fdb/final-code/FurnitureCityBE/FurnitureCityBE.csproj",
       "projectName": "FurnitureCityBE",
       "projectPath": "/Users/bhanu/Documents/Otherwork/pratap/fdb/final-code/FurnitureCityBE/FurnitureCityBE.csproj",
       "packagesPath": "/Users/bhanu/.nuget/packages/",
       "outputPath": "/Users/bhanu/Documents/Otherwork/pratap/fdb/final-code/FurnitureCityBE/obj/",
->>>>>>> Stashed changes
       "projectStyle": "PackageReference",
       "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
@@ -4226,5 +4218,13 @@
         "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file /Users/bhanu/Documents/Otherwork/pratap/fdb/final-code/FurnitureCityBE/obj/project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

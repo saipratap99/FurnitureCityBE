@@ -1,19 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< Updated upstream
-    "/Users/bhanu/Documents/Otherwork/pratap/fdb/backend/FurnitureCityBE/FurnitureCityBE.csproj": {}
-  },
-  "projects": {
-    "/Users/bhanu/Documents/Otherwork/pratap/fdb/backend/FurnitureCityBE/FurnitureCityBE.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/Users/bhanu/Documents/Otherwork/pratap/fdb/backend/FurnitureCityBE/FurnitureCityBE.csproj",
-        "projectName": "FurnitureCityBE",
-        "projectPath": "/Users/bhanu/Documents/Otherwork/pratap/fdb/backend/FurnitureCityBE/FurnitureCityBE.csproj",
-        "packagesPath": "/Users/bhanu/.nuget/packages/",
-        "outputPath": "/Users/bhanu/Documents/Otherwork/pratap/fdb/backend/FurnitureCityBE/obj/",
-=======
     "/Users/bhanu/Documents/Otherwork/pratap/fdb/final-code/FurnitureCityBE/FurnitureCityBE.csproj": {}
   },
   "projects": {
@@ -25,8 +12,8 @@
         "projectPath": "/Users/bhanu/Documents/Otherwork/pratap/fdb/final-code/FurnitureCityBE/FurnitureCityBE.csproj",
         "packagesPath": "/Users/bhanu/.nuget/packages/",
         "outputPath": "/Users/bhanu/Documents/Otherwork/pratap/fdb/final-code/FurnitureCityBE/obj/",
->>>>>>> Stashed changes
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/Users/bhanu/.nuget/NuGet/NuGet.Config"
         ],
