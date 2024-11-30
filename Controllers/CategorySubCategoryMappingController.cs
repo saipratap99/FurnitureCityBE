@@ -1,6 +1,7 @@
 using FurnitureCityBE.Models;
 using FurnitureCityBE.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FurnitureCityBE.Controllers;
 
@@ -11,52 +12,51 @@ public class CategorySubCategoryMappingController(FurnitureStoreDb dbContext) : 
     private readonly FurnitureStoreDb _dbContext = dbContext;
     private readonly GenericRepository<CategorySubCategoryMapping> _repository = new(dbContext);
     
-    
-    [HttpGet]
-    [Route("")]
-    public async Task<ActionResult<List<CategorySubCategoryMapping>>> Index()
-    {
-        return Ok(await _repository.GetAll());
-    }
-
     [HttpPost]
-    [Route("[Action]")]
-    public async Task<ActionResult<object>> Create(CategorySubCategoryMapping subCategory)
+    [Route("[Action]/{subCategoryId}")]
+    public async Task<ActionResult<object>> AssignCategoriesToSubCategory(Guid subCategoryId,List<CategorySubCategoryMapping> mappings)
     {
-        _repository.Add(subCategory);
-        await _repository.Savechange();
-        return Ok(subCategory);
+        // Fetch existing mappings for the subcategory
+        var existingMappings = await _dbContext.CategorySubCategoryMappings
+            .Where(mapping => mapping.SubCategoryId == subCategoryId)
+            .ToListAsync();
+
+        // Extract the IDs from the updated mappings
+        var updatedCategoryIds = mappings.Select(mapping => mapping.CategoryId).ToList();
+
+        // Identify mappings to be added
+        var mappingsToAdd = mappings
+            .Where(updatedMapping => !existingMappings.Any(existingMapping => existingMapping.CategoryId == updatedMapping.CategoryId))
+            .ToList();
+
+        // Identify mappings to be deleted
+        var mappingsToDelete = existingMappings
+            .Where(existingMapping => !updatedCategoryIds.Contains(existingMapping.CategoryId))
+            .ToList();
+
+        // Perform the additions
+        if (mappingsToAdd.Any())
+        {
+            foreach (var mapping in mappingsToAdd)
+            {
+                mapping.Id = Guid.NewGuid(); // Ensure the ID is unique
+                mapping.SubCategoryId = subCategoryId; // Set the subcategory ID
+            }
+            _dbContext.CategorySubCategoryMappings.AddRange(mappingsToAdd);
+        }
+
+        // Perform the deletions
+        if (mappingsToDelete.Any())
+        {
+            _dbContext.CategorySubCategoryMappings.RemoveRange(mappingsToDelete);
+        }
+
+        // Save changes to the database
+        await _dbContext.SaveChangesAsync();
+
+        return Ok("Mappings updated");
     }
 
-    [HttpGet]
-    [Route("[Action]/{id}")]
-    public async Task<ActionResult<CategorySubCategoryMapping>> Get(Guid id)
-    {
-        return Ok(await _repository.GetById(id));
-    }
     
-    [HttpPut]
-    [Route("[Action]/{id}")]
-    public async Task<ActionResult<CategorySubCategoryMapping>> Update(Guid id, CategorySubCategoryMapping subCategory)
-    {
-        var categoryItem = await _repository.GetById(id);
-        if (categoryItem == null)
-            return NotFound("Category not found");
-        _repository.Edit(categoryItem);
-        await _repository.Savechange();
-        return Ok("Sub-Category updated");
-    }
-        
-    [HttpDelete]
-    [Route("[Action]/{id}")]
-    public async Task<ActionResult<CategorySubCategoryMapping>> Delete(Guid id)
-    {
-        var categoryItem = await _repository.GetById(id);
-        if (categoryItem == null)
-            return NotFound("Sub-Category not found");
-        _repository.Del(id);
-        await _repository.Savechange();
-        return Ok("Sub-Category Deleted");
-    }
 }
 
