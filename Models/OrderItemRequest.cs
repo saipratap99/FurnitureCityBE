@@ -9,4 +9,7 @@ public class OrderItemRequest
     [Required]
     public Guid ProductId { get; set; }
     
+    [Required]
+    public Guid userId { get; set; }
+    
 }

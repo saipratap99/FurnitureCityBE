@@ -3,6 +3,7 @@ using System;
 using FurnitureCityBE.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FurnitureCityBE.Migrations
 {
     [DbContext(typeof(FurnitureStoreDb))]
-    partial class FurnitureStoreDbModelSnapshot : ModelSnapshot
+    [Migration("20241130022336_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,6 +110,44 @@ namespace FurnitureCityBE.Migrations
                     b.HasIndex("SubCategoryId");
 
                     b.ToTable("CategorySubCategoryMappings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("517f0459-1a82-45e3-8081-b759d1d48d21"),
+                            CategoryId = new Guid("e06629eb-de6b-41e1-b4e9-01d6bac0a3c0"),
+                            SubCategoryId = new Guid("f106601e-296d-4c77-a7f3-522015498e3c")
+                        },
+                        new
+                        {
+                            Id = new Guid("a15376b5-dc61-422c-9317-d0b69e719569"),
+                            CategoryId = new Guid("836856cc-e6bc-4acd-9dcb-eb18da4f2b10"),
+                            SubCategoryId = new Guid("f106601e-296d-4c77-a7f3-522015498e3c")
+                        },
+                        new
+                        {
+                            Id = new Guid("b92fde30-b3f4-40ff-a4da-49a3cd0dcd91"),
+                            CategoryId = new Guid("44a1f781-0906-45a0-888f-041790c7603f"),
+                            SubCategoryId = new Guid("f106601e-296d-4c77-a7f3-522015498e3c")
+                        },
+                        new
+                        {
+                            Id = new Guid("6ea2bf9b-b619-4de9-b162-2b65d4a15d12"),
+                            CategoryId = new Guid("836856cc-e6bc-4acd-9dcb-eb18da4f2b10"),
+                            SubCategoryId = new Guid("91cc1981-42f6-4176-854b-c06a6f12fd31")
+                        },
+                        new
+                        {
+                            Id = new Guid("d68a2856-4f82-4a2a-8b74-4d5fdd5d3187"),
+                            CategoryId = new Guid("44a1f781-0906-45a0-888f-041790c7603f"),
+                            SubCategoryId = new Guid("91cc1981-42f6-4176-854b-c06a6f12fd31")
+                        },
+                        new
+                        {
+                            Id = new Guid("a124cd66-0db9-4f24-a6e3-89d5c7c07211"),
+                            CategoryId = new Guid("94d4fdb7-b1b7-4b42-aea4-08dc058baf26"),
+                            SubCategoryId = new Guid("836856cc-e6bc-4acd-9dcb-eb18da4f2b10")
+                        });
                 });
 
             modelBuilder.Entity("FurnitureCityBE.Models.ContactUs", b =>
@@ -258,17 +299,12 @@ namespace FurnitureCityBE.Migrations
                     b.Property<Guid>("OrderId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("char(36)");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
                 });
@@ -306,6 +342,128 @@ namespace FurnitureCityBE.Migrations
                     b.HasIndex("SubCategoryId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("972f1963-e72b-4614-b0ba-237a16c21161"),
+                            Description = "A stylish modern sofa for your living room.",
+                            IsActive = true,
+                            Name = "Modern Sofa",
+                            Price = 599.99m,
+                            Quantity = 10,
+                            SubCategoryId = new Guid("f106601e-296d-4c77-a7f3-522015498e3c")
+                        },
+                        new
+                        {
+                            Id = new Guid("b86211f6-b630-4d59-8985-af355f118fec"),
+                            Description = "A spacious and comfortable king-size bed.",
+                            IsActive = true,
+                            Name = "King Size Bed",
+                            Price = 799.99m,
+                            Quantity = 5,
+                            SubCategoryId = new Guid("836856cc-e6bc-4acd-9dcb-eb18da4f2b10")
+                        },
+                        new
+                        {
+                            Id = new Guid("1435a859-24e6-4def-a1a9-f4f0ae3e26fc"),
+                            Description = "A height-adjustable ergonomic desk for your office.",
+                            IsActive = true,
+                            Name = "Ergonomic Office Desk",
+                            Price = 299.99m,
+                            Quantity = 8,
+                            SubCategoryId = new Guid("91cc1981-42f6-4176-854b-c06a6f12fd31")
+                        },
+                        new
+                        {
+                            Id = new Guid("3b94a910-ea37-48ea-93b6-5e937360e9fc"),
+                            Description = "A sleek leather sofa that adds sophistication to any living room.",
+                            IsActive = true,
+                            Name = "Modern Leather Sofa",
+                            Price = 799.99m,
+                            Quantity = 15,
+                            SubCategoryId = new Guid("f106601e-296d-4c77-a7f3-522015498e3c")
+                        },
+                        new
+                        {
+                            Id = new Guid("229447be-26b1-4a27-bb41-0c1486a9ea1d"),
+                            Description = "A spacious and comfortable sectional sofa perfect for family gatherings.",
+                            IsActive = true,
+                            Name = "Sectional Fabric Sofa",
+                            Price = 899.99m,
+                            Quantity = 10,
+                            SubCategoryId = new Guid("f106601e-296d-4c77-a7f3-522015498e3c")
+                        },
+                        new
+                        {
+                            Id = new Guid("512127a0-4501-4b21-af06-0f390183eade"),
+                            Description = "A multi-functional sofa bed with a contemporary design.",
+                            IsActive = true,
+                            Name = "Convertible Sofa Bed",
+                            Price = 499.99m,
+                            Quantity = 8,
+                            SubCategoryId = new Guid("f106601e-296d-4c77-a7f3-522015498e3c")
+                        },
+                        new
+                        {
+                            Id = new Guid("8a7dc4f1-0cd7-4656-ab2b-5f16c02e79dc"),
+                            Description = "A solid wooden bed frame with a classic finish.",
+                            IsActive = true,
+                            Name = "Queen Size Wooden Bed",
+                            Price = 699.99m,
+                            Quantity = 20,
+                            SubCategoryId = new Guid("836856cc-e6bc-4acd-9dcb-eb18da4f2b10")
+                        },
+                        new
+                        {
+                            Id = new Guid("b04c2804-d56b-4ae8-b5df-560d3eb1d587"),
+                            Description = "A luxurious bed with a tufted headboard and sturdy build.",
+                            IsActive = true,
+                            Name = "King Size Upholstered Bed",
+                            Price = 999.99m,
+                            Quantity = 10,
+                            SubCategoryId = new Guid("836856cc-e6bc-4acd-9dcb-eb18da4f2b10")
+                        },
+                        new
+                        {
+                            Id = new Guid("25b2463a-66f1-4ad7-aab4-b76ed06d0010"),
+                            Description = "Perfect for kids, this bunk bed includes under-bed storage drawers.",
+                            IsActive = true,
+                            Name = "Bunk Bed with Storage",
+                            Price = 799.99m,
+                            Quantity = 5,
+                            SubCategoryId = new Guid("836856cc-e6bc-4acd-9dcb-eb18da4f2b10")
+                        },
+                        new
+                        {
+                            Id = new Guid("b05f69f3-6a0d-45de-9df4-254636f13161"),
+                            Description = "A height-adjustable desk designed for ergonomic office setups.",
+                            IsActive = true,
+                            Name = "Adjustable Standing Desk",
+                            Price = 399.99m,
+                            Quantity = 12,
+                            SubCategoryId = new Guid("91cc1981-42f6-4176-854b-c06a6f12fd31")
+                        },
+                        new
+                        {
+                            Id = new Guid("0970b6bd-8ac1-4d61-93d6-b58439b49892"),
+                            Description = "A spacious executive desk with a rich mahogany finish.",
+                            IsActive = true,
+                            Name = "Executive Wooden Desk",
+                            Price = 899.99m,
+                            Quantity = 7,
+                            SubCategoryId = new Guid("91cc1981-42f6-4176-854b-c06a6f12fd31")
+                        },
+                        new
+                        {
+                            Id = new Guid("6075317b-3e06-4210-a0e0-78dd50ff9e60"),
+                            Description = "A minimalist computer desk with a sleek design.",
+                            IsActive = true,
+                            Name = "Compact Computer Desk",
+                            Price = 199.99m,
+                            Quantity = 20,
+                            SubCategoryId = new Guid("91cc1981-42f6-4176-854b-c06a6f12fd31")
+                        });
                 });
 
             modelBuilder.Entity("FurnitureCityBE.Models.ProductImage", b =>
@@ -380,17 +538,17 @@ namespace FurnitureCityBE.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e5b44312-d682-4432-b9d7-f36512b1a975"),
+                            Id = new Guid("c318fb93-4a9c-4548-ae4a-b84fea9c848a"),
                             Name = "Modern"
                         },
                         new
                         {
-                            Id = new Guid("72f3d762-fb59-4920-890f-91cf71c80b7a"),
+                            Id = new Guid("f9fdba4d-7b4a-4e0f-b878-c35dbff9d0c4"),
                             Name = "Luxury"
                         },
                         new
                         {
-                            Id = new Guid("b25aea8f-8fbe-4977-b7f9-07b48723f5db"),
+                            Id = new Guid("06a2a48e-7b25-4f81-a16c-673a8568d133"),
                             Name = "Ergonomic"
                         });
                 });
@@ -500,8 +658,8 @@ namespace FurnitureCityBE.Migrations
                         },
                         new
                         {
-                            Id = new Guid("836856cc-e6bc-4acd-9dcb-eb18da4f2b10"),
-                            Name = "Beds"
+                            Id = new Guid("94d4fdb7-b1b7-4b42-aea4-08dc058baf26"),
+                            Name = "Bedroom"
                         },
                         new
                         {
@@ -575,17 +733,6 @@ namespace FurnitureCityBE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("cf7cc03c-172f-4b11-882d-e463796a1a40"),
-                            Email = "test@test.com",
-                            Mobile = "234565432",
-                            Name = "test",
-                            Password = "test",
-                            Role = "USER"
-                        });
                 });
 
             modelBuilder.Entity("FurnitureCityBE.Models.CategorySubCategoryMapping", b =>
@@ -659,15 +806,7 @@ namespace FurnitureCityBE.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FurnitureCityBE.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Order");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("FurnitureCityBE.Models.Product", b =>

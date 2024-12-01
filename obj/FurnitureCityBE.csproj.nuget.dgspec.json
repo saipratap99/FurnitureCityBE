@@ -1,21 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "/Users/saipratap/PE/FurnitureStore/FurnitureCityBE/FurnitureCityBE.csproj": {}
+    "/Users/bhanu/Documents/Otherwork/pratap/fdb/final-code/FurnitureCityBE/FurnitureCityBE.csproj": {}
   },
   "projects": {
-    "/Users/saipratap/PE/FurnitureStore/FurnitureCityBE/FurnitureCityBE.csproj": {
+    "/Users/bhanu/Documents/Otherwork/pratap/fdb/final-code/FurnitureCityBE/FurnitureCityBE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/saipratap/PE/FurnitureStore/FurnitureCityBE/FurnitureCityBE.csproj",
+        "projectUniqueName": "/Users/bhanu/Documents/Otherwork/pratap/fdb/final-code/FurnitureCityBE/FurnitureCityBE.csproj",
         "projectName": "FurnitureCityBE",
-        "projectPath": "/Users/saipratap/PE/FurnitureStore/FurnitureCityBE/FurnitureCityBE.csproj",
-        "packagesPath": "/Users/saipratap/.nuget/packages/",
-        "outputPath": "/Users/saipratap/PE/FurnitureStore/FurnitureCityBE/obj/",
+        "projectPath": "/Users/bhanu/Documents/Otherwork/pratap/fdb/final-code/FurnitureCityBE/FurnitureCityBE.csproj",
+        "packagesPath": "/Users/bhanu/.nuget/packages/",
+        "outputPath": "/Users/bhanu/Documents/Otherwork/pratap/fdb/final-code/FurnitureCityBE/obj/",
         "projectStyle": "PackageReference",
         "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
-          "/Users/saipratap/.nuget/NuGet/NuGet.Config"
+          "/Users/bhanu/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -44,6 +44,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.11, )"
@@ -82,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

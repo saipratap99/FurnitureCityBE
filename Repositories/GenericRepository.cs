@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using FurnitureCityBE.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,5 +41,9 @@ public class GenericRepository<T>: IGenericRepository<T> where T : class
     public async Task<int> Savechange()
     {
         return await _db.SaveChangesAsync();
+    }
+    public async Task<T?> Find(Expression<Func<T, bool>> predicate)
+    {
+        return await _db.Set<T>().FirstOrDefaultAsync(predicate);
     }
 }
