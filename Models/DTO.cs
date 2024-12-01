@@ -48,3 +48,29 @@ public class ProductReviewDto
     public int Rating { get; set; }
 }
 
+public class ContactUsDTO
+{
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public string Subject { get; set; }
+    public string Description { get; set; }
+}
+
+public class LeadHistoryDTO
+{
+    public Guid Id { get; set; }
+    public string Comments { get; set; }
+    public DateTime Date { get; set; }
+}
+
+public class LeadDTO
+{
+    public Guid Id { get; set; }
+    public DateTime LeadStartDate { get; set; }
+    public string LeadStatus { get; set; }
+    public DateTime NextEnquiryDate { get; set; }
+    public ContactUsDTO ContactUs { get; set; }
+    public List<LeadHistoryDTO>? LeadHistories { get; set; }
+}
+

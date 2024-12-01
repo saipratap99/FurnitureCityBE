@@ -24,6 +24,13 @@ public class ContactUsController(FurnitureStoreDb dbContext) : ControllerBase
     {
         _repository.Add(contactUs);
         await _repository.Savechange();
+        var lead = new Lead
+        {
+            ContactUsId = contactUs.Id, NextEnquiryDate = DateTime.Today.AddDays(7),
+            LeadStatus = LeadStatusEnum.OPEN.ToString(), LeadStartDate = DateTime.Today
+        };
+        _dbContext.Leads.Add(lead);
+        await _dbContext.SaveChangesAsync();
         return Ok(contactUs);
     }
 
