@@ -21,78 +21,106 @@ public class OrderController(FurnitureStoreDb dbContext) : ControllerBase
     {
         return Ok(await _repository.GetAll());
     }
-    
+
     [HttpPost]
     [Route("[Action]")]
     public async Task<ActionResult<Order>> Create(List<OrderItemRequest> items)
     {
-        // creates order
-        // creates order items
-        // creates invoice
-        // creates shipment
-        var userId = new Guid("cf7cc03c-172f-4b11-882d-e463796a1a40");
-        var orderId = new Guid();
-        _repository.Add(new Order{UserId = userId, Status = OrderStatus.PLACED.ToString(), Id = orderId});
-        var orderItemsToAdd = new List<OrderItem>();
-        var productIds = new List<Guid>();
-        foreach (var item in items)
-        {
-            productIds.Add(item.ProductId);
-            orderItemsToAdd.Add(new OrderItem {OrderId = orderId, ProductId = item.ProductId, Quantity = item.Quantity});
-        }
-        _repositoryShipment.Add(new ShipmentStatus(){OrderId = orderId, Status = ShippmentStatus.YET_TO_DISPATCH.ToString(), Id = orderId});
-        
-        // Fetch product details from the database
-        var productsOrdered = await _dbContext.Products
-            .Where(product => productIds.Contains(product.Id))
-            .ToListAsync();
+        if (items == null || items.Count == 0)
+            return BadRequest("No items provided.");
 
-        
-        // Calculate the net amount
-        decimal netAmount = 0;
-        foreach (var orderItem in orderItemsToAdd)
-        {
-            var product = productsOrdered.FirstOrDefault(p => p.Id == orderItem.ProductId);
-            if (product == null)
-            {
-                return BadRequest($"Product with ID {orderItem.ProductId} not found.");
-            }
-        
-            if (!product.IsActive || product.Quantity < orderItem.Quantity)
-            {
-                return BadRequest($"Product {product.Name} is not available in the required quantity.");
-            }
+        var userId = items[0].userId;
+        var orderId = Guid.NewGuid();
 
-            // Deduct the quantity from the product's stock
-            product.Quantity -= orderItem.Quantity;
+    // Create a new order
+    var order = new Order
+    {
+        Id = orderId,
+        OrderId="order",
+        UserId = userId,
+        Status = OrderStatus.PLACED.ToString()
+    };
+Console.WriteLine(order);
 
-            // Calculate the total price for this product
-            netAmount += product.Price * orderItem.Quantity;
-        }
+  // Add the order to the database
+  _dbContext.Orders.Add(order);
+  await _dbContext.SaveChangesAsync(); // Ensure the order is saved and the ID is available for foreign key references
 
-        // Calculate tax and total amounts
-        const decimal taxPercentage = 18m;
-        decimal taxAmount = Math.Round((netAmount * taxPercentage) / 100, 2);
-        decimal totalAmount = netAmount + taxAmount;
+  // Prepare order items
+  var orderItemsToAdd = new List<OrderItem>();
+  var productIds = items.Select(i => i.ProductId).ToList();
 
-        // Generate a new invoice
-        var invoice = new Invoice
-        {
-            Id = Guid.NewGuid(),
-            Date = DateTime.UtcNow,
-            InvoiceNumber = $"INV-{DateTime.UtcNow.Ticks}",
-            NetAmount = netAmount,
-            TaxAmount = taxAmount,
-            TotalAmount = totalAmount,
-            OrderId = orderId
-        };
+  // Fetch product details
+  var productsOrdered = await _dbContext.Products
+      .Where(product => productIds.Contains(product.Id))
+      .ToListAsync();
 
-        // Add the invoice to the database
-        _dbContext.Invoices.Add(invoice);
-        _dbContext.OrderItems.AddRange(orderItemsToAdd);
+  decimal netAmount = 0;
+
+  foreach (var item in items)
+  {
+      var product = productsOrdered.FirstOrDefault(p => p.Id == item.ProductId);
+      if (product == null)
+          return BadRequest($"Product with ID {item.ProductId} not found.");
+
+      if (!product.IsActive || product.Quantity < item.Quantity)
+          return BadRequest($"Product {product.Name} is not available in the required quantity.");
+
+      // Deduct stock
+      product.Quantity -= item.Quantity;
+
+      // Calculate net amount
+      netAmount += product.Price * item.Quantity;
+
+      // Create order item
+
+      orderItemsToAdd.Add(new OrderItem
+      {
+          OrderId = orderId,
+          ProductId = item.ProductId,
+          Quantity = item.Quantity
+      });
+
+  }
+   
+
+    // Add order items
+    _dbContext.OrderItems.AddRange(orderItemsToAdd);
+
+    // Calculate tax and total amount
+    const decimal taxPercentage = 18m;
+    decimal taxAmount = Math.Round((netAmount * taxPercentage) / 100, 2);
+    decimal totalAmount = netAmount + taxAmount;
+
+    // Create invoice
+    var invoice = new Invoice
+    {
+        Id = Guid.NewGuid(),
+        Date = DateTime.UtcNow,
+        InvoiceNumber = $"INV-{DateTime.UtcNow.Ticks}",
+        NetAmount = netAmount,
+        TaxAmount = taxAmount,
+        TotalAmount = totalAmount,
+        OrderId = orderId // Foreign key reference to the saved order
+    };
+
+    // Add the invoice to the database
+    _dbContext.Invoices.Add(invoice);
+
+    // Add shipment status
+    var shipmentStatus = new ShipmentStatus
+    {
+        Id = Guid.NewGuid(),
+        OrderId = orderId,
+        Status = ShippmentStatus.YET_TO_DISPATCH.ToString()
+    };
+    _dbContext.ShipmentStatuses.Add(shipmentStatus);
+
+        // Save all changes
         await _dbContext.SaveChangesAsync();
 
         return Ok(orderId);
-    }
 
+        
+    }
 }

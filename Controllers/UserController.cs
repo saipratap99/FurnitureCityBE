@@ -38,7 +38,7 @@ public class UserController : ControllerBase
     {
         return Ok(await _repository.GetById(id));
     }
-/*
+
     // Register API
     [HttpPost]
     [Route("[Action]")]
@@ -58,8 +58,8 @@ public class UserController : ControllerBase
 
         return Ok(new { message = "Registration successful.", userId = user.Id });
     }
-    */
-/*
+    
+
     // Login API
     [HttpPost]
     [Route("[Action]")]
@@ -81,6 +81,6 @@ public class UserController : ControllerBase
 
         return Ok(new { message = loginMessage, userId = user.Id, userRole = user.Role });
     }
-    */
+    
 
 }

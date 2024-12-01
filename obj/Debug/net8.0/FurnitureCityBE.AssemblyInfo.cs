@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FurnitureCityBE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+964bc81e5338011f07c15863dd81cf84dd77a395")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+61a31a7863e4913e23b3bb12936c099f44a8502f")]
 [assembly: System.Reflection.AssemblyProductAttribute("FurnitureCityBE")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FurnitureCityBE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

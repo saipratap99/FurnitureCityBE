@@ -12,7 +12,7 @@ public class Order
     [MaxLength(50)]
     public string Status { get; set; }
 
-    [Required]
+  
     [MaxLength(50)]
     public string OrderId { get; set; }
 
