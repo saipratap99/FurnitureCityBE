@@ -37,6 +37,15 @@ public class GenericRepository<T>: IGenericRepository<T> where T : class
     {
         return await _db.Set<T>().FindAsync(id);
     }
+    public async Task<Invoice?> GetInvoiceByOrderId(Guid orderId)
+    {
+        return await _db.Set<Invoice>().FirstOrDefaultAsync(invoice => invoice.OrderId == orderId);
+    }
+
+    public async Task<List<Order>> GetOrderByUserId(Guid userId)
+    {
+        return await _db.Set <Order>().Where(order => order.UserId == userId).ToListAsync();
+    }
 
     public async Task<int> Savechange()
     {
