@@ -52,7 +52,7 @@ public class UserController : ControllerBase
         }
 
         user.Id = Guid.NewGuid();
-
+        user.Role = UserRoles.USER.ToString();
         _repository.Add(user);
         await _repository.Savechange();
 
