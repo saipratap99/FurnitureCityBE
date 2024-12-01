@@ -74,3 +74,37 @@ public class LeadDTO
     public List<LeadHistoryDTO>? LeadHistories { get; set; }
 }
 
+public class OrderDetailsDTO
+{
+    public Guid OrderId { get; set; }
+    public UserDTO User { get; set; }
+    public string ShipmentStatus { get; set; }
+    public InvoiceDTO InvoiceDetails { get; set; }
+    public List<OrderItemDTO> OrderItems { get; set; }
+}
+
+public class UserDTO
+{
+    public Guid UserId { get; set; }
+    public DateTime Date { get; set; }
+    public string UserName { get; set; }
+    public string Email { get; set; }
+}
+
+public class OrderItemDTO
+{
+    public Guid ProductId { get; set; }
+    public string ProductName { get; set; }
+    public int Quantity { get; set; }
+    public decimal Price { get; set; }
+}
+
+public class InvoiceDTO
+{
+    public Guid InvoiceId { get; set; }
+    public string InvoiceNumber { get; set; }
+    public decimal NetAmount { get; set; }
+    public decimal TaxAmount { get; set; }
+    public decimal TotalAmount { get; set; }
+    public DateTime Date { get; set; }
+}
