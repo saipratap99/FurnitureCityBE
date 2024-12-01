@@ -21,7 +21,16 @@ public class OrderController(FurnitureStoreDb dbContext) : ControllerBase
     {
         return Ok(await _repository.GetAll());
     }
-
+    [HttpGet]
+    [Route("[Action]/{userId}")]
+    public async Task<ActionResult<Order>> Get(Guid userId)
+    {
+        var order = await _repository.GetOrderByUserId(userId);
+        if (order.Any())
+            return NotFound("order not found");
+        return Ok(order);
+    }
+    
     [HttpPost]
     [Route("[Action]")]
     public async Task<ActionResult<Order>> Create(List<OrderItemRequest> items)
